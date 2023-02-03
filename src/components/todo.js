@@ -207,7 +207,7 @@ const TodoPage = () => {
             <DeleteTodoMenu/>
         </div>
         <div>
-        {todos.length === 0 && todoloaded? (
+        {todos.length === 0? (
         <div className="flex flex-col items-center">
             <img className="object-cover h-screen max-h-[70vh]" src={img_1} alt="img-1"/>
             <p className="text-xl text-center font">Start creating todos</p>

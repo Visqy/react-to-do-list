@@ -177,7 +177,7 @@ const ListPage = () => {
             <DeleteListMenu/>
         </div>
         <div className="flex flex-col py-1">
-        {lists.length === 0 && listLoaded? (
+        {lists.length === 0? (
             <div className="h-screen max-h-[80vh] flex flex-col justify-center items-center">
                 <div className="border-double border-8 px-24 py-12">
                     <h1 className="text-8xl font-bold text-center font">TO-DO LIST</h1>
