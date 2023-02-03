@@ -91,7 +91,10 @@ const ListPage = () => {
 		if (lists) {
 			setLists(lists);
             setListLoaded(true);
-		}
+		} else {
+            setLists([]);
+            setListLoaded(true);
+        }
 	}, []);
 
 	useEffect(() => {
