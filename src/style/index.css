@@ -14,4 +14,13 @@
           monospace;
       }
 }
- 
+
+.font {
+    color: #fafafa;
+}
+
+.bg-img {
+    background-image: url("../assets/image/bg.jpg"),
+    linear-gradient(rgb(17, 24, 39), rgb(75, 85, 99));
+    background-blend-mode: overlay;
+}

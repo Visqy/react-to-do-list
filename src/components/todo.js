@@ -36,7 +36,6 @@ const TodoPage = () => {
         } else {
             setError(true);
             setTodoItemNames('');
-            setShowAddNewTodo(false);
         }
         
     }
@@ -54,22 +53,25 @@ const TodoPage = () => {
             let deleteId = todoItemNames;
             return(
                 <>
-                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="justify-center backdrop-blur-lg items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                     <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                        <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                        <h3 className="text text-3xl font-semibold">
+                    <div className=" w-full p-1 rounded-lg flex justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ">
+                    <div className="border-0 rounded-lg shadow-lg relative w-full bg-gray-800 outline-none focus:outline-none">
+                    <div className="border-0 rounded-lg relative flex flex-col w-full bg-gray-900/50 outline-none focus:outline-none">
+                        <div className="flex items-start justify-between p-5 rounded-t">
+                        <h3 className="text-3xl font-semibold font">
+
                             Delete Todo 
                         </h3>
                         </div>
                         <div className="relative p-6 flex-auto">
-                            <p className="my-4 text-slate-500 text-lg leading-relaxed text">
+                            <p className="my-4 text-neutral-50 text-lg leading-relaxed text">
                                 Are you sure to delete this item?
                             </p>
                         </div>
-                        <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                        <div className="flex items-center justify-end p-6 rounded-b">
                         <button
-                            className="text text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            className="text text-rose-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
                             onClick={() => setShowDeleteTodoMenu(false)}
                         >
@@ -86,6 +88,8 @@ const TodoPage = () => {
                         </div>
                     </div>
                     </div>
+                </div>
+                </div>
                 </div>
                 <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
                 </>
@@ -139,72 +143,78 @@ const TodoPage = () => {
 
     return (
         <>
-        <div className="flex flex-row justify-between border-b-2 py-3">
+        <>
+        {showAddNewTodo ? (
+            <>
+            <div className="justify-center backdrop-blur-lg items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                <div className=" w-full p-1 rounded-lg flex justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ">
+                <div className="border-0 rounded-lg shadow-lg relative w-full bg-gray-800 outline-none focus:outline-none">
+                <div className="border-0 rounded-lg relative flex flex-col w-full bg-gray-900/50 outline-none focus:outline-none">
+                    <div className="flex items-start justify-between p-5 rounded-t">
+                    <h3 className="text-3xl font-semibold font">
+                        Add New Todo 
+                    </h3>
+                    </div>
+                    <form id="AddNewtodo" onSubmit={handleSubmitTodo} className="relative p-6 flex-auto">
+                    <div className='bg-gray-800 rounded drop-shadow-lg'>
+                        <input
+                                className={`bg-gray-900/50 text-neutral-50 p-2 rounded border-solid border-2 focus:outline-none focus:border-neutral-50 focus:border-neutral-50 ${error? ("border-rose-500"): ("border-gray-900")}`}
+                                type="text"
+                                onChange={(e) => setTodoItemNames(e.target.value)}
+                                placeholder="Type todo here..."
+                            />
+                    </div>
+                    </form>
+                    <div className="flex items-center justify-end p-6 rounded-b">
+                    <button
+                        className="text-rose-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => setShowAddNewTodo(false)}
+                    >
+                        Close
+                    </button>
+                    <button
+                        className="text bg-emerald-500 text-neutral-50 active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="submit"
+                        form='AddNewtodo'
+                    >
+                        Add Todo
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+            </>
+        ) : null}
+        </>
+        <DeleteTodoMenu/>
+        <div className='drop-shadow-2xl mb-5 rounded flex justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
+        <div className="flex w-full h-full flex-row justify-between p-3 items-center">
             <div className="flex flex-row items-center">
-                <button onClick={() => navigate('/')}>
+                <button className="text-neutral-50 hover:text-indigo-300" onClick={() => navigate('/')}>
                     <FontAwesomeIcon icon={faCircleArrowLeft} size="2x" className='mx-2'/>
                 </button>
                 <h1 className="text-3xl font-bold font mx-2">{name}</h1>
             </div>
             {showDeleteTodo? (
-            <button className="flex flex-row items-center mx-2" onClick={() => setShowDeleteTodo(false)}> 
+            <button className="mx-1 text-neutral-50 hover:text-pink-300" onClick={() => setShowDeleteTodo(false)}> 
                 <FontAwesomeIcon icon={faCircleXmark} size="2x" className='mx-2'/>
-                <p className="text-2xl font-bold font">Cancel</p>
             </button>
                 ):(
             <div className='flex flex-row'>
-                <button className="flex flex-row items-center mx-2" onClick={() => setShowAddNewTodo(true)}> 
+                <button className="mx-1 text-neutral-50 hover:text-pink-300" onClick={() => setShowAddNewTodo(true)}> 
                     <FontAwesomeIcon icon={faCirclePlus} size="2x" className='mx-2'/>
-                    <p className="text-2xl font-bold font">Add New Todo</p>
                 </button>
-                <button className="flex flex-row items-center mx-2" onClick={() => setShowDeleteTodo(true)}> 
+                <button className="mx-1 text-neutral-50 hover:text-pink-300" onClick={() => setShowDeleteTodo(true)}> 
                         <FontAwesomeIcon icon={faTrashCan} size="2x" className='mx-2'/>
-                        <p className="text-2xl font-bold font">Delete Todo</p>
                 </button>
             </div>
             )}
-            <>
-            {showAddNewTodo ? (
-                <>
-                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                        <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                        <h3 className="text text-3xl font-semibold">
-                            Add New Todo 
-                        </h3>
-                        </div>
-                        <form id="AddNewtodo" onSubmit={handleSubmitTodo} className="relative p-6 flex-auto">
-                            <input
-                                    type="text"
-                                    onChange={(e) => setTodoItemNames(e.target.value)}
-                                    placeholder="Type todo here..."
-                                />
-                        </form>
-                        <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                        <button
-                            className="text text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="button"
-                            onClick={() => setShowAddNewTodo(false)}
-                        >
-                            Close
-                        </button>
-                        <button
-                            className="text bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="submit"
-                            form='AddNewtodo'
-                        >
-                            Add Todo
-                        </button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-                </>
-            ) : null}
-            </>
-            <DeleteTodoMenu/>
+        </div>
         </div>
         <div>
         {todos.length === 0? (
@@ -214,7 +224,7 @@ const TodoPage = () => {
         </div>
         ):(
         <>
-        <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-row justify-between items-center mb-5">
             <div className="flex flex-col items-start p-3">
                 <h5 className='text-2xl font font-bold'>{todos.length < 10 ? `0${todos.length}` : todos.length}</h5>
                 <p className='text-xl font font-bold'>Created todo</p>
@@ -230,28 +240,32 @@ const TodoPage = () => {
         {todos.map((todoItems) => {
             const {id, name, complete} = todoItems;
             return (
-                <div key={id} className="w-full border-2 border-solid border-l-8 p-3 my-1 flex flex-row justify-between items-center">
-                    <p className={complete ? 'text-2xl font my-1 line-through' : 'text-2xl font my-1'}>{name}</p>
+                <div key={id} className={` drop-shadow-xl w-full p-1 my-1 rounded flex justify-center bg-gradient-to-r  ${complete? 'from-emerald-500 to-emerald-700':'from-rose-500 to-rose-800'} `}>
+                <div className="w-full h-full rounded bg-gray-800">
+                <div className="w-full h-full rounded  p-3 flex flex-row justify-between items-center bg-gray-900/50">
+                    <p className={`'text-2xl font my-1 select-none ${complete ? 'line-through' : ""}`}>{name}</p>
                     {showDeleteTodo ? (
                     <button key={id} onClick={ () => {
                         setTodoItemNames(id);
                         setShowDeleteTodoMenu(true);    
                     }}>
-                        <FontAwesomeIcon icon={faTrashCan} size="2x" className='mx-2 text-red-500' />
+                        <FontAwesomeIcon icon={faTrashCan} size="2x" className='mx-2 text-rose-500' />
                     </button>                     
                     ) : (
                         <>
                         {complete ? (
                         <button onClick={() => toggleComplete(id)}>
-                            <FontAwesomeIcon icon={faSquareCheck} size="2x" className='mx-2' />   
+                            <FontAwesomeIcon icon={faSquareCheck} size="2x" className='mx-2 text-neutral-50' />   
                         </button>
                         ) : (
                         <button onClick={() => toggleComplete(id)}>
-                            <FontAwesomeIcon icon={faSquare} size="2x" className='mx-2' />
+                            <FontAwesomeIcon icon={faSquare} size="2x" className='mx-2 text-neutral-50' />
                         </button>
                         )}
                         </>
                     )}
+                </div>
+                </div>
                 </div>        
             )
         }) 
